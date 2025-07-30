@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Link,
+} from "react-router-dom";
+import "./App.scss";
+
+import Register from "./Register";
+import MoodTracker from "./MoodTracker";
+import Journal from "./Journal";
+import Login from "./Login";
+import VerifyEmail from "./VerifyEmail"; // Make sure to create this component
+
+function Landing() {
+  return (
+    <header className="App-header">
+      <img
+        src="/serene-mind-logo.png"
+        alt="SereneMind Journey Logo"
+        className="logo"
+      />
+      <h1>Welcome to SereneMind Journey</h1>
+      <div className="button-group">
+        <Link to="/register">
+          <button>Register</button>
+        </Link>
+        <Link to="/login">
+          <button>Login</button>
+        </Link>
+      </div>
+    </header>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/moodTracker" element={<MoodTracker />} />
+          <Route path="/journal" element={<Journal />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
+          {/* Redirect any unknown routes back to landing */}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
