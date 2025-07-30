@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.scss";
 
-function Home({ userData, setView }) {
+function Home({ userData }) {
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <header className="App-header">
@@ -10,10 +13,10 @@ function Home({ userData, setView }) {
         </h1>
         <p>Start your journey to better mental health today.</p>
         <div className="button-group">
-          <button onClick={() => setView("mood")}>Track Mood</button>
-          <button onClick={() => setView("journal")}>Journal</button>
-          <button onClick={() => setView("community")}>Community</button>
-          <button onClick={() => setView("urgent")}>Urgent Help</button>
+          <button onClick={() => navigate("/moodTracker")}>Track Mood</button>
+          <button onClick={() => navigate("/journal")}>Journal</button>
+          <button onClick={() => navigate("/community")}>Community</button>
+          <button onClick={() => navigate("/urgent")}>Urgent Help</button>
         </div>
       </header>
     </div>

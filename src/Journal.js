@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.scss";
 
-function Journal({ setView }) {
+function Journal() {
   const [entry, setEntry] = useState("");
   const [entries, setEntries] = useState({});
   const [selectedDate, setSelectedDate] = useState(getToday());
+  const navigate = useNavigate();
 
   function getToday() {
-    return new Date().toISOString().split("T")[0]; // e.g. "2025-07-29"
+    return new Date().toISOString().split("T")[0]; // e.g. "2025-07-30"
   }
 
   useEffect(() => {
@@ -48,7 +50,6 @@ function Journal({ setView }) {
     localStorage.setItem("journalEntries", JSON.stringify(updated));
   };
 
-  // Helper for display text of selected date
   const displayDate = selectedDate === getToday() ? "Today" : selectedDate;
 
   return (
@@ -94,7 +95,7 @@ function Journal({ setView }) {
           ))}
         </div>
 
-        <button onClick={() => setView("home")} className="back-button">
+        <button onClick={() => navigate("/home")} className="back-button">
           Back
         </button>
       </header>

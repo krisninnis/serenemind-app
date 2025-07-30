@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   Link,
+  useNavigate,
 } from "react-router-dom";
 import "./App.scss";
 
@@ -12,9 +13,21 @@ import Register from "./Register";
 import MoodTracker from "./MoodTracker";
 import Journal from "./Journal";
 import Login from "./Login";
-import VerifyEmail from "./VerifyEmail"; // Make sure to create this component
+import VerifyEmail from "./VerifyEmail";
+import Home from "./Home";
+import Community from "./Community";
+import UrgentHelp from "./UrgentHelp";
 
-function Landing() {
+// Landing page with Register/Login/Bypass
+function LandingWithBypass() {
+  const navigate = useNavigate();
+
+  const handleBypass = () => {
+    localStorage.setItem("token", "dev-bypass-token");
+    console.log("Bypass clicked, navigating to home");
+    navigate("/home");
+  };
+
   return (
     <header className="App-header">
       <img
@@ -30,6 +43,7 @@ function Landing() {
         <Link to="/login">
           <button>Login</button>
         </Link>
+        <button onClick={handleBypass}>Bypass Login</button>
       </div>
     </header>
   );
@@ -40,14 +54,20 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<LandingWithBypass />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+          <Route
+            path="/home"
+            element={
+              <Home userData={{ firstName: "Dev", lastName: "Bypass" }} />
+            }
+          />
           <Route path="/moodTracker" element={<MoodTracker />} />
           <Route path="/journal" element={<Journal />} />
-          <Route path="/verify-email/:token" element={<VerifyEmail />} />
-
-          {/* Redirect any unknown routes back to landing */}
+          <Route path="/community" element={<Community />} />
+          <Route path="/urgent" element={<UrgentHelp />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
