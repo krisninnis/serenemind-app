@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./App.scss";
 import axios from "axios";
-import { useAuth } from "./AuthContext"; // Assuming AuthContext is set up
+import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
-function MoodTracker({ setView }) {
+function MoodTracker() {
   const [mood, setMood] = useState("");
   const [suggestion, setSuggestion] = useState("");
-  const { token } = useAuth(); // Get token from AuthContext
+  const { token } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +56,7 @@ function MoodTracker({ setView }) {
           <button type="submit">Submit</button>
         </form>
         {suggestion && <p>Suggestion: {suggestion}</p>}
-        <button onClick={() => setView("home")} className="back-button">
+        <button onClick={() => navigate("/home")} className="back-button">
           Back
         </button>
       </header>
