@@ -1,11 +1,11 @@
-// routes/chat.js
 const express = require("express");
 const router = express.Router();
 const { OpenAI } = require("openai");
 
-// Initialize OpenAI
+// Use OpenRouter base URL here:
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "https://openrouter.ai/api/v1", // <-- important!
 });
 
 router.post("/", async (req, res) => {
@@ -13,20 +13,17 @@ router.post("/", async (req, res) => {
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "mistralai/mistral-7b-instruct", // try this model or any from OpenRouter
       messages: [{ role: "user", content: message }],
     });
 
     const reply = response.choices[0].message.content.trim();
     res.status(200).json({ reply });
   } catch (error) {
-    console.error("❌ OpenAI API Error:");
-    console.dir(error, { depth: null }); // Log full error object
-
-    res.status(500).json({
-      message: "Something went wrong with OpenAI",
-      error: error.message || "Unknown error",
-    });
+    console.error("OpenRouter error:", error.message);
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
