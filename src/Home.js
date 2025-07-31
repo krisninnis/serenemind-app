@@ -8,6 +8,11 @@ function Home({ userData }) {
   return (
     <div className="App">
       <header className="App-header">
+        <img
+          src="/serene-mind-logo.png"
+          alt="SereneMind Logo"
+          className="logo"
+        />
         <h1>
           Welcome, {userData.firstName} {userData.lastName}!
         </h1>
@@ -17,6 +22,9 @@ function Home({ userData }) {
           <button onClick={() => navigate("/journal")}>Journal</button>
           <button onClick={() => navigate("/community")}>Community</button>
           <button onClick={() => navigate("/urgent")}>Urgent Help</button>
+          <button onClick={() => navigate("/chat")}>
+            Chat with Minda (AI)
+          </button>
         </div>
       </header>
     </div>

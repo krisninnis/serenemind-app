@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Register new user and send verification email
-exports.register = async (req, res) => {
+exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
   try {
     const existing = await User.findOne({ email });
@@ -79,7 +79,7 @@ exports.verifyEmail = async (req, res) => {
 };
 
 // Login only if email is verified
-exports.login = async (req, res) => {
+exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });

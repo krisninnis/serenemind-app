@@ -17,6 +17,7 @@ import VerifyEmail from "./VerifyEmail";
 import Home from "./Home";
 import Community from "./Community";
 import UrgentHelp from "./UrgentHelp";
+import ChatWithMinda from "./ChatWithMinda"; // 👈 NEW import
 
 // Landing page with Register/Login/Bypass
 function LandingWithBypass() {
@@ -68,6 +69,8 @@ function App() {
           <Route path="/journal" element={<Journal />} />
           <Route path="/community" element={<Community />} />
           <Route path="/urgent" element={<UrgentHelp />} />
+          <Route path="/chat" element={<ChatWithMinda />} />{" "}
+          {/* 👈 NEW route */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

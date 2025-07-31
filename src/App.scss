@@ -1,7 +1,7 @@
 // Define variables for the mellow theme
 $background-color: #f5f1e9;
-$text-color: #4a4e69;
-$header-color: #6d8299;
+$text-color: #2a2a2a; // Darker for better contrast
+$header-color: #4a4e69; // Slightly darkened
 $button-color: #a3bffa;
 $hover-color: #8da9e7;
 $back-button-color: #d1c4e9;
@@ -24,12 +24,12 @@ $shadow-color: rgba(109, 130, 153, 0.3);
     font-size: calc(16px + 2vmin);
 
     .logo {
-      width: 200px; // Keep width but allow adjustment
+      width: 200px;
       height: auto;
-      max-width: 100%; // Prevent horizontal overflow
-      max-height: 150px; // Cap height to prevent massive scaling
+      max-width: 100%;
+      max-height: 150px;
       margin-bottom: 10px;
-      object-fit: contain; // Ensure the image fits without distortion
+      object-fit: contain;
     }
 
     h1 {
@@ -156,4 +156,78 @@ $shadow-color: rgba(109, 130, 153, 0.3);
       }
     }
   }
+}
+
+// Chatbot UI styles
+.chatbot-header {
+  max-width: 600px;
+  margin: auto;
+  padding-bottom: 1rem;
+}
+
+.minda-subtitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: $header-color;
+}
+
+.chat-box {
+  background: #ffffffcc;
+  border-radius: 10px;
+  padding: 1rem;
+  height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+  color: $text-color;
+}
+
+.chat-message {
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border-radius: 8px;
+  max-width: 80%;
+  font-family: "Georgia", serif;
+  font-size: 16px;
+}
+
+.chat-message.user {
+  background-color: #4caf50;
+  align-self: flex-end;
+  color: #fff;
+  margin-left: auto;
+}
+
+.chat-message.minda {
+  background-color: #2196f3;
+  color: #fff;
+  margin-right: auto;
+}
+
+.chat-input-group {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.chat-input-group input {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-family: "Georgia", serif;
+  color: $text-color;
+}
+
+.chat-input-group button {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #5c6bc0;
+  color: white;
+  cursor: pointer;
 }
