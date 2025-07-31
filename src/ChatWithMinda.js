@@ -27,11 +27,13 @@ function ChatWithMinda() {
     setInput("");
 
     try {
-      const response = await axios.post("/api/chat", { message: input });
+      // Use relative URL here since proxy handles forwarding to backend
+      const response = await axios.post("/chat", { message: input });
       const reply = response.data.reply || "I'm here to support you.";
       const botMessage = { sender: "minda", text: reply };
       setMessages((prev) => [...prev, botMessage]);
     } catch (err) {
+      console.error("Chat error:", err);
       setMessages((prev) => [
         ...prev,
         {
