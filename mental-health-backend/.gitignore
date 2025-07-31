@@ -1,2 +1,22 @@
-".env" 
-.env 
+# Node modules
+/node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables file
+.env
+
+# Optional: Build output
+dist/
+build/
+
+# OS generated files
+.DS_Store
+
+# Optional: coverage reports
+coverage/
