@@ -13,22 +13,9 @@ import Register from "./Register";
 import MoodTracker from "./MoodTracker";
 import Journal from "./Journal";
 import Login from "./Login";
-import VerifyEmail from "./VerifyEmail";
-import Home from "./Home";
-import Community from "./Community";
-import UrgentHelp from "./UrgentHelp";
-import ChatWithMinda from "./ChatWithMinda"; // 👈 NEW import
+import VerifyEmail from "./VerifyEmail"; // Make sure to create this component
 
-// Landing page with Register/Login/Bypass
-function LandingWithBypass() {
-  const navigate = useNavigate();
-
-  const handleBypass = () => {
-    localStorage.setItem("token", "dev-bypass-token");
-    console.log("Bypass clicked, navigating to home");
-    navigate("/home");
-  };
-
+function Landing() {
   return (
     <header className="App-header">
       <img
@@ -67,10 +54,9 @@ function App() {
           />
           <Route path="/moodTracker" element={<MoodTracker />} />
           <Route path="/journal" element={<Journal />} />
-          <Route path="/community" element={<Community />} />
-          <Route path="/urgent" element={<UrgentHelp />} />
-          <Route path="/chat" element={<ChatWithMinda />} />{" "}
-          {/* 👈 NEW route */}
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
+          {/* Redirect any unknown routes back to landing */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
