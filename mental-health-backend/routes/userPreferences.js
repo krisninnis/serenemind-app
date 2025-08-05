@@ -1,3 +1,8 @@
+const express = require("express");
+const router = express.Router(); // <-- define router here
+const User = require("../models/User");
+const authenticate = require("../controllers/authMiddleware");
+
 // GET current user preferences
 router.get("/", authenticate, async (req, res) => {
   try {
@@ -52,3 +57,5 @@ router.put("/", authenticate, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+module.exports = router;
