@@ -7,11 +7,8 @@ const userSchema = new mongoose.Schema(
     isVerified: { type: Boolean, default: false },
 
     sessionPreferences: {
-      type: {
-        breathingSessionLevel: { type: String, default: "Slow Sloth" },
-        // Add more preferences here if needed later
-      },
-      default: {},
+      breathingSessionLevel: { type: String, default: "slow-sloth" },
+      // Add more preferences here if needed later
     },
   },
   { timestamps: true }

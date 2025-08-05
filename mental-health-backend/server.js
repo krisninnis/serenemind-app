@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
 const chatRoutes = require("./routes/chat");
+const userPreferencesRoutes = require("./routes/userPreferences"); // new import
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,6 +19,7 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/chat", chatRoutes);
+app.use("/api/user-preferences", userPreferencesRoutes); // new route mount
 
 // Root route
 app.get("/", (req, res) => {
