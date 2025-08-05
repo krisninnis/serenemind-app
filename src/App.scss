@@ -1,8 +1,8 @@
-// Define variables for the mellow theme
+// Variables
 $background-color: #f5f1e9;
-$text-color: #2a2a2a; // Darker for better contrast
-$header-color: #4a4e69; // Slightly darkened
-$button-color: #a3bffa;
+$text-color: #6a0dad;
+$header-color: #6a0dad;
+$button-color: #7e27de;
 $hover-color: #8da9e7;
 $back-button-color: #d1c4e9;
 $hover-back-color: #b39ddb;
@@ -14,6 +14,9 @@ $shadow-color: rgba(109, 130, 153, 0.3);
   background-color: $background-color;
   min-height: 100vh;
   color: $text-color;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0 auto;
 
   .App-header {
     display: flex;
@@ -22,13 +25,14 @@ $shadow-color: rgba(109, 130, 153, 0.3);
     justify-content: center;
     font-family: "Georgia", serif;
     font-size: calc(16px + 2vmin);
+    padding: 20px;
 
     .logo {
-      width: 200px;
-      height: auto;
+      width: 180px;
       max-width: 100%;
       max-height: 150px;
-      margin-bottom: 10px;
+      height: auto;
+      margin-bottom: 15px;
       object-fit: contain;
     }
 
@@ -38,81 +42,40 @@ $shadow-color: rgba(109, 130, 153, 0.3);
       font-weight: 400;
       text-shadow: 1px 1px 3px $shadow-color;
       letter-spacing: 1px;
+      font-size: calc(1.5rem + 1vw);
     }
 
     .button-group {
       display: flex;
+      justify-content: center;
       gap: 15px;
-    }
+      margin-bottom: 20px;
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      margin-bottom: 15px;
-
-      label {
-        color: $header-color;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 14px;
-      }
-
-      input,
-      select,
-      textarea {
-        padding: 10px;
+      button,
+      .link-button {
+        padding: 12px 25px;
         font-size: 16px;
-        border: 1px solid $button-color;
-        border-radius: 6px;
+        cursor: pointer;
+        background-color: $button-color;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
         font-family: "Georgia", serif;
-        background-color: #fff;
-        transition: border-color 0.3s ease;
-        color: $text-color;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
 
+        &:hover,
         &:focus {
-          border-color: $hover-color;
+          background-color: $hover-color;
           outline: none;
         }
       }
 
-      textarea {
-        min-height: 100px;
-        resize: vertical;
-      }
-    }
-
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: $button-color;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-family: "Georgia", serif;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: $hover-color;
-      }
-    }
-
-    .back-button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: $back-button-color;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-family: "Georgia", serif;
-      margin-top: 15px;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: $hover-back-color;
+      .link-button {
+        display: inline-block;
       }
     }
 
@@ -122,112 +85,416 @@ $shadow-color: rgba(109, 130, 153, 0.3);
       font-style: italic;
       text-shadow: 1px 1px 2px rgba(109, 130, 153, 0.2);
     }
+  }
+}
 
-    .journal-entries {
-      margin-top: 20px;
-      text-align: left;
-      max-width: 600px;
-      width: 100%;
+/* Page list styling */
+.page-list {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 2 10px;
+}
 
-      .entry {
-        background: #fff;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 6px;
-        border: 1px solid $button-color;
-        box-shadow: 0 2px 4px $shadow-color;
+.page-box {
+  background-color: #e7e4d9;
+  padding: 16px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(109, 130, 153, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 3px;
 
-        p {
-          margin: 5px 0;
-        }
+  h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: $header-color;
+    font-size: 1.2rem;
+  }
 
-        button {
-          padding: 5px 10px;
-          font-size: 14px;
-          background-color: #e57373;
-          border: none;
-          border-radius: 4px;
-          color: #fff;
+  p.clickable-description {
+    margin: 0;
+    color: $text-color;
+    font-size: 1rem;
+  }
 
-          &:hover {
-            background-color: #d32f2f;
-          }
-        }
-      }
+  &:hover,
+  &:focus {
+    background-color: #d9d7c4;
+    box-shadow: 0 4px 12px rgba(109, 130, 153, 0.4);
+    outline: 3px solid $button-color;
+  }
+}
+
+.page-box:focus {
+  outline: 3px solid $button-color;
+  background-color: #d9d7c4;
+}
+
+@media (max-width: 480px) {
+  .App-header {
+    padding: 10px 5px;
+
+    .logo {
+      max-width: 140px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .page-list {
+    gap: 10px;
+    padding: 0 5px;
+  }
+
+  .page-box {
+    padding: 12px 15px;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    p.clickable-description {
+      font-size: 0.9rem;
     }
   }
 }
 
-// Chatbot UI styles
-.chatbot-header {
-  max-width: 600px;
-  margin: auto;
-  padding-bottom: 1rem;
+.page-box {
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 10;
 }
 
-.minda-subtitle {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  color: $header-color;
-}
-
+/* Stylish chat message box */
 .chat-box {
-  background: #ffffffcc;
-  border-radius: 10px;
-  padding: 1rem;
-  height: 300px;
-  overflow-y: auto;
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto 1rem;
-  color: $text-color;
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px $shadow-color;
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 400px;
 }
 
 .chat-message {
-  margin: 0.5rem 0;
-  padding: 0.75rem;
+  margin: 10px 0;
+  padding: 12px 16px;
   border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(109, 130, 153, 0.1);
   max-width: 80%;
-  font-family: "Georgia", serif;
-  font-size: 16px;
-}
+  word-wrap: break-word;
 
-.chat-message.user {
-  background-color: #4caf50;
-  align-self: flex-end;
-  color: #fff;
-  margin-left: auto;
-}
+  &.minda {
+    background-color: #f9f5ff;
+    border-left: 4px solid $header-color;
+    align-self: flex-start;
+    color: $header-color;
 
-.chat-message.minda {
-  background-color: #2196f3;
-  color: #fff;
-  margin-right: auto;
+    &:before {
+      content: "💬 Minda";
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 4px;
+    }
+  }
+
+  &.user {
+    background-color: #e8f0fe;
+    border-right: 4px solid $button-color;
+    align-self: flex-end;
+    color: $text-color;
+
+    &:before {
+      content: "You";
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 4px;
+      text-align: right;
+    }
+  }
 }
 
 .chat-input-group {
   display: flex;
-  gap: 0.5rem;
+  gap: 10px;
+  margin-top: 15px;
+  max-width: 600px;
   width: 100%;
-  max-width: 500px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+  input {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 1px solid $header-color;
+    border-radius: 20px;
+    font-family: "Georgia", serif;
+    color: $text-color;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $button-color;
+      box-shadow: 0 0 5px $hover-color;
+    }
+
+    &::placeholder {
+      color: #a0a0a0;
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: $button-color;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-family: "Georgia", serif;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
 }
 
-.chat-input-group input {
-  flex: 1;
-  padding: 0.75rem;
-  font-size: 1rem;
+/* ✅ Updated buttons for Journal */
+.save-btn,
+.export-btn,
+.back-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
+  background-color: $button-color;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+.delete-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #e57373;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #d32f2f;
+  }
+}
+
+/* Journal entry list */
+.journal-page {
+  textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    padding: 12px;
+    border: 1px solid $header-color;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Georgia", serif;
+    margin-bottom: 15px;
+    background-color: #fff;
+    color: $text-color;
+    resize: vertical;
+    box-shadow: 0 2px 6px $shadow-color;
+
+    &:focus {
+      outline: none;
+      border-color: $button-color;
+      box-shadow: 0 0 5px $hover-color;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 20px auto;
+
+    li {
+      background: #fff;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px $shadow-color;
+      text-align: left;
+
+      strong {
+        display: block;
+        margin-bottom: 6px;
+        color: $header-color;
+      }
+
+      p {
+        margin: 0;
+        white-space: pre-line;
+      }
+    }
+  }
+}
+.journal-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.journal-form textarea {
+  width: 100%;
+  height: 120px;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.journal-form button {
+  background-color: #6c63ff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.journal-form button:hover {
+  background-color: #574fe1;
+}
+
+.mood-filter {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.entry-card {
+  background: #f9f9f9;
+  border-left: 8px solid #bbb;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.entry-card .entry-date {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+.entry-card .entry-text {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.entry-card .entry-mood {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.mood-happy {
+  border-left-color: #fbc531;
+}
+.mood-sad {
+  border-left-color: #487eb0;
+}
+.mood-anxious {
+  border-left-color: #e84118;
+}
+.mood-angry {
+  border-left-color: #c23616;
+}
+.mood-neutral {
+  border-left-color: #95a5a6;
+}
+.keyword-prompts {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 12px 16px;
+  background-color: #eef6ff;
+  border: 1px solid #477cee;
   border-radius: 8px;
   font-family: "Georgia", serif;
-  color: $text-color;
-}
+  font-size: 1rem;
+  color: #2a2a2a;
 
-.chat-input-group button {
-  padding: 0.75rem 1rem;
-  border: none;
+  p {
+    margin: 0 0 10px 0;
+    font-style: italic;
+  }
+}
+.keyword-prompts {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 12px 16px;
+  background-color: #eef6ff;
+  border: 1px solid #477cee;
   border-radius: 8px;
-  background-color: #5c6bc0;
-  color: white;
-  cursor: pointer;
+  font-family: "Georgia", serif;
+  font-size: 1rem;
+  color: #2a2a2a;
+
+  .prompt-block {
+    margin-bottom: 16px;
+
+    p {
+      margin: 0 0 8px;
+      font-style: italic;
+    }
+
+    .ask-minda-btn {
+      padding: 8px 14px;
+      background-color: #477cee;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #305dcf;
+      }
+    }
+  }
 }

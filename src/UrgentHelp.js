@@ -14,12 +14,21 @@ function UrgentHelp() {
   return (
     <div className="App">
       <header className="App-header">
+        <img
+          src="/serene-mind-logo.png"
+          alt="SereneMind Logo"
+          className="logo"
+        />
+
         <h1>Urgent Help</h1>
         <p>If you need immediate support, click below.</p>
-        <button onClick={handleUrgentClick}>Get Help Now</button>
-        <button onClick={() => navigate("/home")} className="back-button">
-          Back
-        </button>
+
+        <div className="button-group">
+          <button onClick={handleUrgentClick}>Get Help Now</button>
+          <button className="link-button" onClick={() => navigate("/home")}>
+            Back
+          </button>
+        </div>
       </header>
     </div>
   );

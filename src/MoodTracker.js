@@ -36,15 +36,31 @@ function MoodTracker() {
   return (
     <div className="App">
       <header className="App-header">
+        {/* 👇 Logo added here */}
+        <img
+          src="/serene-mind-logo.png"
+          alt="SereneMind Logo"
+          className="logo"
+        />
+
         <h1>Mood Tracker</h1>
+        <p>Select your current mood and get a suggestion.</p>
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>How do you feel?</label>
+            <label htmlFor="mood">How do you feel? </label>
             <select
+              id="mood"
               name="mood"
               value={mood}
               onChange={(e) => setMood(e.target.value)}
               required
+              style={{
+                padding: "10px",
+                fontSize: "16px",
+                borderRadius: "8px",
+                marginTop: "10px",
+              }}
             >
               <option value="">Select Mood</option>
               <option value="happy">Happy</option>
@@ -53,12 +69,19 @@ function MoodTracker() {
               <option value="calm">Calm</option>
             </select>
           </div>
-          <button type="submit">Submit</button>
+
+          <div className="button-group">
+            <button type="submit">Submit</button>
+          </div>
         </form>
+
         {suggestion && <p>Suggestion: {suggestion}</p>}
-        <button onClick={() => navigate("/home")} className="back-button">
-          Back
-        </button>
+
+        <div className="button-group">
+          <button className="link-button" onClick={() => navigate("/home")}>
+            Back
+          </button>
+        </div>
       </header>
     </div>
   );

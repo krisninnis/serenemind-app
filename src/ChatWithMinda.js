@@ -1,6 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import ChatService from "./services/ChatService";
 import "./App.scss";
+
+// Helper to convert URLs in text to clickable links
+function linkify(text) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(
+    urlRegex,
+    (url) =>
+      `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
+  );
+}
 
 function ChatWithMinda() {
   const [input, setInput] = useState("");
@@ -27,13 +37,10 @@ function ChatWithMinda() {
     setInput("");
 
     try {
-      // Use relative URL here since proxy handles forwarding to backend
-      const response = await axios.post("/chat", { message: input });
-      const reply = response.data.reply || "I'm here to support you.";
+      const reply = await ChatService.sendMessage(input);
       const botMessage = { sender: "minda", text: reply };
       setMessages((prev) => [...prev, botMessage]);
-    } catch (err) {
-      console.error("Chat error:", err);
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -47,6 +54,12 @@ function ChatWithMinda() {
   return (
     <div className="App-header">
       <div className="chatbot-header">
+        <img
+          src="/serene-mind-logo.png"
+          alt="SereneMind Logo"
+          className="logo"
+        />
+
         <h1>Chat with Minda</h1>
         <p className="minda-subtitle">
           Your mindful mental wellness assistant 🌿
@@ -55,9 +68,11 @@ function ChatWithMinda() {
 
       <div className="chat-box" ref={chatBoxRef}>
         {messages.map((msg, idx) => (
-          <div key={idx} className={`chat-message ${msg.sender}`}>
-            {msg.text}
-          </div>
+          <div
+            key={idx}
+            className={`chat-message ${msg.sender}`}
+            dangerouslySetInnerHTML={{ __html: linkify(msg.text) }}
+          />
         ))}
       </div>
 

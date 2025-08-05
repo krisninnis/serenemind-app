@@ -1,0 +1,98 @@
+// src/MindfulnessCheckIn.scss
+.mindfulness-checkin {
+  font-family: "Segoe UI", sans-serif;
+  padding: 2rem;
+  background-color: #f5f3f7;
+  color: #333;
+  min-height: 100vh;
+
+  .App-header {
+    text-align: center;
+
+    .logo {
+      max-height: 80px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  main {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section {
+      background: white;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .breathing-countdown {
+      .instruction {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .count {
+        font-size: 4rem;
+        font-weight: bold;
+        color: #6a1b9a;
+        animation: pulse 1s ease-in-out infinite;
+      }
+    }
+
+    .congrats {
+      font-size: 1.2rem;
+      color: green;
+      margin: 1rem 0;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #6a1b9a;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #4a148c;
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

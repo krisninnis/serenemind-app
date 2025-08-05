@@ -1,65 +1,91 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Journal.scss";
 
-const router = express.Router();
+function Journal({ setView }) {
+  const [entry, setEntry] = useState("");
+  const [entries, setEntries] = useState([]);
+  const [selectedMood, setSelectedMood] = useState("All");
 
-// Register route
-router.post("/register", async (req, res) => {
-  try {
-    const { username, email, password, dateOfBirth } = req.body;
+  const fetchEntries = async () => {
+    try {
+      const res = await axios.get("/api/journal");
+      setEntries(res.data.reverse());
+    } catch (err) {
+      console.error("Error fetching entries:", err);
+    }
+  };
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser)
-      return res.status(400).json({ message: "Email already exists" });
+  useEffect(() => {
+    fetchEntries();
+  }, []);
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!entry) return;
+    try {
+      await axios.post("/api/journal", {
+        text: entry,
+        date: new Date().toISOString(),
+      });
+      setEntry("");
+      fetchEntries();
+    } catch (err) {
+      console.error("Error saving entry:", err);
+    }
+  };
 
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword,
-      dateOfBirth,
-    });
+  const moods = ["All", "Happy", "Sad", "Anxious", "Angry", "Neutral"];
 
-    await newUser.save();
+  const filteredEntries =
+    selectedMood === "All"
+      ? entries
+      : entries.filter((e) => e.mood === selectedMood);
 
-    res.status(201).json({ message: "User registered successfully" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
+  return (
+    <div className="journal-page">
+      <h2>My Journal</h2>
+      <form onSubmit={handleSubmit} className="journal-form">
+        <textarea
+          placeholder="Write your thoughts..."
+          value={entry}
+          onChange={(e) => setEntry(e.target.value)}
+        />
+        <button type="submit">Save Entry</button>
+      </form>
 
-// Login route
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
+      <div className="mood-filter">
+        <label>Filter by mood:</label>
+        <select
+          value={selectedMood}
+          onChange={(e) => setSelectedMood(e.target.value)}
+        >
+          {moods.map((mood) => (
+            <option key={mood} value={mood}>
+              {mood}
+            </option>
+          ))}
+        </select>
+      </div>
 
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+      <div className="entries-list">
+        {filteredEntries.map((entry, idx) => (
+          <div
+            key={idx}
+            className={`entry-card mood-${entry.mood?.toLowerCase()}`}
+          >
+            <div className="entry-date">
+              {entry.date === new Date().toISOString().split("T")[0]
+                ? "Today"
+                : entry.date.split("T")[0]}
+            </div>
+            <div className="entry-text">{entry.text}</div>
+            {entry.mood && <div className="entry-mood">Mood: {entry.mood}</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(400).json({ message: "Invalid credentials" });
-
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-
-    res.json({
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-module.exports = router;
+export default Journal;
