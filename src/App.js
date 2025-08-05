@@ -1,5 +1,4 @@
-// src/App.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,14 +21,16 @@ import Community from "./Community";
 import UrgentHelp from "./UrgentHelp";
 import ChatWithMinda from "./ChatWithMinda";
 import MindfulnessCheckIn from "./components/MindfulnessCheckIn";
+import BreathingLevelSelector from "./components/BreathingLevelSelector";
 
-// Landing page component with a bypass login button
 function LandingWithBypass() {
   const navigate = useNavigate();
 
   const handleBypass = () => {
+    const fakeUser = { firstName: "Dev", lastName: "Bypass" };
     localStorage.setItem("token", "dev-bypass-token");
-    navigate("/home");
+    localStorage.setItem("userData", JSON.stringify(fakeUser));
+    navigate("/select-breathing-level");
   };
 
   return (
@@ -55,12 +56,25 @@ function LandingWithBypass() {
 
 function AppRoutes() {
   const location = useLocation();
-  const hiddenPaths = ["/login", "/register", "/verify-email"];
-
-  // Show chatbot only if current path is NOT one of the hiddenPaths
+  const hiddenPaths = [
+    "/login",
+    "/register",
+    "/verify-email",
+    "/select-breathing-level",
+  ];
   const showChatbot = !hiddenPaths.some((path) =>
     location.pathname.startsWith(path)
   );
+
+  const [userData, setUserData] = useState(null);
+
+  // Load userData from localStorage on first mount
+  useEffect(() => {
+    const savedUser = localStorage.getItem("userData");
+    if (savedUser) {
+      setUserData(JSON.parse(savedUser));
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -71,15 +85,22 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
         <Route
-          path="/home"
-          element={<Home userData={{ firstName: "Dev", lastName: "Bypass" }} />}
+          path="/select-breathing-level"
+          element={<BreathingLevelSelector />}
         />
-        <Route path="/moodTracker" element={<MoodTracker />} />
-        <Route path="/journal" element={<Journal />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/urgent" element={<UrgentHelp />} />
-        <Route path="/chat" element={<ChatWithMinda />} />
-        <Route path="/mindfulness" element={<MindfulnessCheckIn />} />
+        <Route path="/home" element={<Home userData={userData} />} />
+        <Route
+          path="/moodTracker"
+          element={<MoodTracker userData={userData} />}
+        />
+        <Route path="/journal" element={<Journal userData={userData} />} />
+        <Route path="/community" element={<Community userData={userData} />} />
+        <Route path="/urgent" element={<UrgentHelp userData={userData} />} />
+        <Route path="/chat" element={<ChatWithMinda userData={userData} />} />
+        <Route
+          path="/mindfulness"
+          element={<MindfulnessCheckIn userData={userData} />}
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

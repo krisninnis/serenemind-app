@@ -1,0 +1,43 @@
+.animal-choice {
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .animal-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .animal-button {
+    border: none;
+    color: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: 180px;
+    height: 150px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      margin: 0 0 0.5rem 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

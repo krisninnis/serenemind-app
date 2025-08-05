@@ -1,0 +1,52 @@
+.breathing-level-selector {
+  text-align: center;
+  padding: 1rem;
+
+  .options-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .option-card {
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+    width: 200px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover,
+    &.selected {
+      background-color: #d8b4fe; // light purple highlight
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.2);
+      transform: scale(1.05);
+    }
+
+    .emoji {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      margin: 0.3rem 0;
+      font-weight: 700;
+      color: #5a189a; // purple
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 0.6rem;
+    }
+
+    small {
+      font-size: 0.8rem;
+      color: #555;
+    }
+  }
+}

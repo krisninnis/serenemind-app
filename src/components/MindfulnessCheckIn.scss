@@ -1,98 +1,240 @@
-// src/MindfulnessCheckIn.scss
 .mindfulness-checkin {
-  font-family: "Segoe UI", sans-serif;
-  padding: 2rem;
-  background-color: #f5f3f7;
-  color: #333;
+  font-family: "Georgia", serif;
+  color: #6a0dad;
+  background-color: #f5f1e9;
   min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 
-  .App-header {
+  .intro-screen,
+  .session-screen {
+    max-width: 600px;
+    margin: 0 auto;
     text-align: center;
-
-    .logo {
-      max-height: 80px;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
   }
 
-  main {
-    margin-top: 2rem;
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+  }
+
+  .session-selector {
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
 
-    section {
-      background: white;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      text-align: center;
-    }
-
-    .breathing-countdown {
-      .instruction {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .count {
-        font-size: 4rem;
-        font-weight: bold;
-        color: #6a1b9a;
-        animation: pulse 1s ease-in-out infinite;
-      }
-    }
-
-    .congrats {
+    .session-option {
       font-size: 1.2rem;
-      color: green;
-      margin: 1rem 0;
-    }
-
-    textarea {
-      width: 100%;
-      padding: 1rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-    }
-
-    button {
-      margin-top: 1rem;
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      background-color: #6a1b9a;
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
       cursor: pointer;
+      user-select: none;
+      border: 2px solid transparent;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      background-color: #e7e4d9;
+      color: #6a0dad;
 
-      &:hover {
-        background-color: #4a148c;
+      input {
+        margin-right: 8px;
+        cursor: pointer;
+      }
+
+      &.selected {
+        background-color: #7e27de;
+        color: white;
+        border-color: #7e27de;
+
+        input {
+          cursor: pointer;
+        }
+      }
+
+      &:hover:not(.selected),
+      &:focus:not(.selected) {
+        background-color: #d9d7c4;
+        outline: none;
       }
     }
   }
-}
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
+  .start-btn,
+  .control-btn {
+    background-color: #7e27de;
+    border: none;
+    color: white;
+    padding: 14px 36px;
+    font-size: 1.25rem;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 0 10px 20px 10px;
+    transition: background-color 0.3s ease;
+    user-select: none;
+
+    &:hover,
+    &:focus {
+      background-color: #8da9e7;
+      outline: none;
+    }
   }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
+
+  .stop-btn {
+    background-color: #e84118;
+    margin-left: 20px;
+
+    &:hover,
+    &:focus {
+      background-color: #c23616;
+      outline: none;
+    }
   }
-  100% {
-    transform: scale(1);
-    opacity: 1;
+
+  .timer-remaining {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #7e27de;
+    font-family: "Georgia", serif;
+  }
+
+  .breathing-visual {
+    margin: 30px auto 40px;
+    width: 220px;
+    height: 220px;
+    position: relative;
+  }
+
+  .breath-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: #b39ddb;
+    box-shadow: 0 0 30px #7e27de88;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+
+    &.breathe-in {
+      animation-name: breathe-in;
+      animation-duration: 4s;
+    }
+    &.hold {
+      animation-name: hold;
+      animation-duration: 2s;
+      background-color: #8da9e7;
+      box-shadow: 0 0 20px #477cee88;
+    }
+    &.breathe-out {
+      animation-name: breathe-out;
+      animation-duration: 6s;
+      background-color: #7e27de;
+      box-shadow: 0 0 40px #8da9e7cc;
+    }
+  }
+
+  @keyframes breathe-in {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes hold {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+  }
+  @keyframes breathe-out {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+  }
+
+  .quote-box {
+    max-width: 600px;
+    background-color: #eef6ff;
+    border: 1px solid #477cee;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(109, 130, 153, 0.3);
+    padding: 15px 20px;
+    margin: 30px auto 10px auto;
+    font-family: "Georgia", serif;
+    color: #2a2a2a;
+    text-align: center;
+    user-select: none;
+
+    .quote-text {
+      font-style: italic;
+      font-size: 1.1rem;
+      margin: 0 0 8px 0;
+    }
+
+    .quote-author {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #477cee;
+      margin: 0;
+    }
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
+    .session-selector {
+      gap: 15px;
+
+      .session-option {
+        font-size: 1rem;
+        padding: 6px 14px;
+      }
+    }
+
+    .breathing-visual {
+      width: 160px;
+      height: 160px;
+    }
+
+    .breath-circle {
+      width: 160px;
+      height: 160px;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    .start-btn,
+    .control-btn {
+      font-size: 1rem;
+      padding: 10px 28px;
+      margin: 0 5px 15px 5px;
+    }
+
+    .timer-remaining {
+      font-size: 2.2rem;
+    }
   }
 }

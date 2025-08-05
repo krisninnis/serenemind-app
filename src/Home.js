@@ -1,44 +1,50 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "./App.scss";
+import { useNavigate, Navigate } from "react-router-dom";
+import "./Home.scss";
 
 function Home({ userData }) {
   const navigate = useNavigate();
 
+  if (!userData) {
+    return <Navigate to="/login" replace />;
+  }
+
   const pages = [
     {
-      name: "Track Mood",
+      title: "Daily Mindfulness Check-in",
       description:
-        "Log your daily mood to keep track of your emotional wellbeing.",
-      path: "/moodTracker",
+        "Begin your day with breathing and mindfulness sessions to stay grounded.",
+      route: "/mindfulness",
     },
     {
-      name: "Journal",
+      title: "Mood Tracker",
       description:
-        "Write journal entries to reflect on your thoughts and feelings.",
-      path: "/journal",
+        "Log and track your moods daily to spot patterns and trends.",
+      route: "/moodTracker",
     },
     {
-      name: "Community",
-      description: "Connect and share with others in a supportive environment.",
-      path: "/community",
-    },
-    {
-      name: "Urgent Help",
+      title: "Journal",
       description:
-        "Access immediate resources and support when you need it most.",
-      path: "/urgent",
+        "Write personal journal entries and reflect on your thoughts and feelings.",
+      route: "/journal",
     },
     {
-      name: "Chat with Minda (AI)",
-      description: "Talk with Minda, your AI mental wellness companion.",
-      path: "/chat",
-    },
-    {
-      name: "Daily Mindfulness Check-in",
+      title: "Chat with Minda (AI)",
       description:
-        "Short guided check-ins with a 3-minute breathing exercise, a gratitude prompt, and a calming quote or affirmation.",
-      path: "/mindfulness",
+        "Have a conversation with our AI assistant for mindfulness and mental wellness guidance.",
+      route: "/chat",
+    },
+    {
+      title: "Community",
+      description:
+        "Connect with others for support, share stories, and find encouragement.",
+      route: "/community",
+    },
+    {
+      title: "Urgent Help",
+      description:
+        "Access immediate resources and support when you need urgent mental health assistance.",
+      route: "/urgent",
     },
   ];
 
@@ -56,17 +62,25 @@ function Home({ userData }) {
         <p>Start your journey to better mental health today.</p>
 
         <div className="page-list">
-          {pages.map((page) => (
+          {pages.map(({ title, description, route }) => (
             <div
-              key={page.name}
+              key={title}
               className="page-box"
-              role="button"
               tabIndex={0}
-              onClick={() => navigate(page.path)}
-              onKeyDown={(e) => e.key === "Enter" && navigate(page.path)}
+              role="button"
+              onClick={() => navigate(route)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  navigate(route);
+                }
+              }}
+              aria-label={`${title}: ${description}`}
             >
-              <h2>{page.name}</h2>
-              <p className="clickable-description">{page.description}</p>
+              <button type="button" className="page-title-button" tabIndex={-1}>
+                {title}
+              </button>
+              <p className="clickable-description">{description}</p>
             </div>
           ))}
         </div>
