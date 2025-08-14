@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./App.scss";
+import "./styles/themes/App.scss";
 function Register() {
   const [formData, setFormData] = useState({
     username: "",

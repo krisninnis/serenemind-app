@@ -8,7 +8,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import "./App.scss";
+import "./styles/themes/App.scss";
 
 import FloatingChatbot from "./components/FloatingChatbot";
 import Register from "./Register";
@@ -16,18 +16,30 @@ import MoodTracker from "./MoodTracker";
 import Journal from "./Journal";
 import Login from "./Login";
 import VerifyEmail from "./VerifyEmail";
-import Home from "./Home";
 import Community from "./Community";
 import UrgentHelp from "./UrgentHelp";
 import ChatWithMinda from "./ChatWithMinda";
-import MindfulnessCheckIn from "./components/MindfulnessCheckIn";
 import BreathingLevelSelector from "./components/BreathingLevelSelector";
+import MeditationSession from "./components/MeditationSession";
+import SessionPreferences from "./components/SessionPreferences";
+import SlothHomepage from "./SlothHomepage";
+import SlothCheckIn from "./components/SlothCheckIn";
+import KoalaHomepage from "./KoalaHomepage";
+import KoalaCheckIn from "./components/KoalaCheckIn";
+import ZebraHomepage from "./ZebraHomepage";
+import ZebraCheckIn from "./components/ZebraCheckIn";
+import ProtectedRoute from "./components/ProtectedRoute";
+import FoodScanner from "./components/FoodScanner";
 
 function LandingWithBypass() {
   const navigate = useNavigate();
 
   const handleBypass = () => {
-    const fakeUser = { firstName: "Dev", lastName: "Bypass" };
+    const fakeUser = {
+      firstName: "Dev",
+      lastName: "Bypass",
+      breathingLevel: "slow-sloth", // Default to sloth, updated by BreathingLevelSelector
+    };
     localStorage.setItem("token", "dev-bypass-token");
     localStorage.setItem("userData", JSON.stringify(fakeUser));
     navigate("/select-breathing-level");
@@ -56,19 +68,15 @@ function LandingWithBypass() {
 
 function AppRoutes() {
   const location = useLocation();
+  const [userData, setUserData] = useState(null);
+
   const hiddenPaths = [
     "/login",
     "/register",
     "/verify-email",
     "/select-breathing-level",
   ];
-  const showChatbot = !hiddenPaths.some((path) =>
-    location.pathname.startsWith(path)
-  );
 
-  const [userData, setUserData] = useState(null);
-
-  // Load userData from localStorage on first mount
   useEffect(() => {
     const savedUser = localStorage.getItem("userData");
     if (savedUser) {
@@ -76,9 +84,14 @@ function AppRoutes() {
     }
   }, []);
 
+  const showChatbot = !hiddenPaths.some((path) =>
+    location.pathname.startsWith(path)
+  );
+
   return (
     <div className="App">
       {showChatbot && <FloatingChatbot />}
+
       <Routes>
         <Route path="/" element={<LandingWithBypass />} />
         <Route path="/register" element={<Register />} />
@@ -88,7 +101,6 @@ function AppRoutes() {
           path="/select-breathing-level"
           element={<BreathingLevelSelector />}
         />
-        <Route path="/home" element={<Home userData={userData} />} />
         <Route
           path="/moodTracker"
           element={<MoodTracker userData={userData} />}
@@ -97,10 +109,74 @@ function AppRoutes() {
         <Route path="/community" element={<Community userData={userData} />} />
         <Route path="/urgent" element={<UrgentHelp userData={userData} />} />
         <Route path="/chat" element={<ChatWithMinda userData={userData} />} />
+        <Route path="/preferences" element={<SessionPreferences />} />
+        <Route path="/meditation" element={<MeditationSession />} />
+
+        {/* 🐌 Sloth Mode Routes (protected) */}
         <Route
-          path="/mindfulness"
-          element={<MindfulnessCheckIn userData={userData} />}
+          path="/sloth-home"
+          element={
+            <ProtectedRoute>
+              <SlothHomepage userData={userData} />
+            </ProtectedRoute>
+          }
         />
+        <Route
+          path="/sloth-checkin"
+          element={
+            <ProtectedRoute>
+              <SlothCheckIn userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🐨 Koala Mode Routes (protected) */}
+        <Route
+          path="/koala-home"
+          element={
+            <ProtectedRoute>
+              <KoalaHomepage userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/koala-checkin"
+          element={
+            <ProtectedRoute>
+              <KoalaCheckIn userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🦓 Zebra Mode Routes (protected) */}
+        <Route
+          path="/zebra-home"
+          element={
+            <ProtectedRoute>
+              <ZebraHomepage userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/zebra-checkin"
+          element={
+            <ProtectedRoute>
+              <ZebraCheckIn userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🍎 Food Scanner Route (protected) */}
+        <Route
+          path="/food-scanner"
+          element={
+            <ProtectedRoute>
+              <FoodScanner userData={userData} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

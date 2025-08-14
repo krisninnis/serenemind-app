@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./App.scss";
+import "./styles/themes/App.scss";
 
 function Community() {
   const navigate = useNavigate();

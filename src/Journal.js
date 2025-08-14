@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import "./App.scss";
+import "./styles/themes/App.scss";
 
 const getToday = () => new Date().toISOString().split("T")[0];
 

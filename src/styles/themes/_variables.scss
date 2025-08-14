@@ -1,0 +1,64 @@
+// styles/themes/_variables.scss
+
+// Base variables (shared)
+$base-background-color: #f5f1e9;
+$base-text-color: #6a0dad;
+$base-header-color: #6a0dad;
+$base-button-color: #7e27de;
+$base-hover-color: #8da9e7;
+$base-back-button-color: #d1c4e9;
+$base-hover-back-color: #b39ddb;
+$base-shadow-color: rgba(109, 130, 153, 0.3);
+
+// Sloth theme
+$sloth-theme: (
+  background-color: #f5f1e9,
+  text-color: #6a0dad,
+  header-color: #6a0dad,
+  button-color: #7e27de,
+  hover-color: #8da9e7,
+  back-button-color: #d1c4e9,
+  hover-back-color: #b39ddb,
+  shadow-color: rgba(109, 130, 153, 0.3),
+  font-family: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+);
+
+// Koala theme (grey calm)
+$koala-theme: (
+  background-color: #e8e8e8,
+  text-color: #4a4a4a,
+  header-color: #3b3b3b,
+  button-color: #6b6b6b,
+  hover-color: #8c8c8c,
+  back-button-color: #d6d6d6,
+  hover-back-color: #b0b0b0,
+  shadow-color: rgba(100, 100, 100, 0.3),
+  font-family: "Arial, Helvetica, sans-serif",
+);
+
+// Zebra theme (black & white)
+$zebra-theme: (
+  background-color: #fff,
+  text-color: #222,
+  header-color: #000,
+  button-color: #000,
+  hover-color: #444,
+  back-button-color: #eee,
+  hover-back-color: #ccc,
+  shadow-color: rgba(0, 0, 0, 0.25),
+  font-family: "Courier New, Courier, monospace",
+);
+
+// Mixin for using theme variables
+@mixin theme-colors($theme) {
+  background-color: map-get($theme, background-color);
+  color: map-get($theme, text-color);
+  font-family: map-get($theme, font-family);
+  box-shadow: 0 4px 10px map-get($theme, shadow-color);
+}
+
+// Usage example:
+// .some-class {
+//   background-color: map-get($sloth-theme, background-color);
+//   color: map-get($sloth-theme, text-color);
+// }

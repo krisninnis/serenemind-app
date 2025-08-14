@@ -1,0 +1,118 @@
+.App.zebra-theme {
+  background: #857f7f;
+  color: #222;
+  font-family: "Courier New", Courier, monospace;
+  min-height: 100vh;
+  padding: 2rem;
+
+  .App-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    width: 180px;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: #000;
+    text-shadow: 1px 1px 0 #fff;
+  }
+
+  p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: #555;
+  }
+
+  .page-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .page-box {
+    position: relative;
+    background: repeating-linear-gradient(
+      45deg,
+      #444,
+      /* softened black */ #444 12px,
+      #ddd 12px,
+      #ddd 24px
+    );
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #111;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
+
+    /* add a subtle translucent white overlay behind the text for readability */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(255 255 255 / 0.85);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Put text above overlay */
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover,
+    &:focus {
+      background: repeating-linear-gradient(
+        45deg,
+        #555,
+        #555 12px,
+        #eee 12px,
+        #eee 24px
+      );
+      transform: translateY(-4px);
+      outline: none;
+
+      &::before {
+        background-color: rgba(255 255 255 / 0.9);
+      }
+    }
+  }
+
+  .page-title-button {
+    background: transparent;
+    border: none;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    text-align: left;
+
+    &:hover,
+    &:focus {
+      color: #000;
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  .clickable-description {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #222;
+  }
+}

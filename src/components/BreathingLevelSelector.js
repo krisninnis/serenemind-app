@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./BreathingLevelSelector.scss";
 
 const options = [
@@ -30,18 +31,102 @@ const options = [
 
 function BreathingLevelSelector() {
   const [selected, setSelected] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSelect = (option) => {
+  // Fetch current user preference on mount
+  useEffect(() => {
+    async function fetchPreference() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Please login to select your breathing level.");
+        setLoading(false);
+        return;
+      }
+
+      if (token === "dev-bypass-token") {
+        // For bypass user, load from localStorage only
+        const localLevel = localStorage.getItem("breathingLevel");
+        setSelected(localLevel || null);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const res = await axios.get("/api/user-preferences", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSelected(res.data.breathingSessionLevel || null);
+      } catch (err) {
+        setError(
+          err.response?.data?.message ||
+            "Failed to load your breathing preference."
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPreference();
+  }, []);
+
+  // Handle user clicking an option
+  const handleSelect = async (option) => {
     setSelected(option.id);
-    // Save choice locally (expand to backend later)
-    localStorage.setItem("breathingLevel", option.id);
-    localStorage.setItem("breathingDuration", option.duration);
-    // After short delay, navigate to Home
-    setTimeout(() => {
-      navigate("/home");
-    }, 600); // 0.6 seconds for UX feedback
+    setError("");
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("You must be logged in to save preferences.");
+      return;
+    }
+
+    // Map breathing level to route
+    const levelToRoute = {
+      "slow-sloth": "/sloth-home",
+      "calm-koala": "/koala-home",
+      "zen-zebra": "/zebra-home",
+    };
+
+    // Update userData in localStorage to reflect selected breathing level
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    userData.breathingLevel = option.id;
+    localStorage.setItem("userData", JSON.stringify(userData));
+
+    if (token === "dev-bypass-token") {
+      // Save locally only for bypass user
+      localStorage.setItem("breathingLevel", option.id);
+      localStorage.setItem("breathingDuration", option.duration);
+      setTimeout(() => {
+        navigate(levelToRoute[option.id] || "/");
+      }, 600);
+      return;
+    }
+
+    try {
+      // Save to backend
+      await axios.put(
+        "/api/user-preferences",
+        { breathingSessionLevel: option.id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // Save locally for quick access
+      localStorage.setItem("breathingLevel", option.id);
+      localStorage.setItem("breathingDuration", option.duration);
+
+      // Navigate after short delay
+      setTimeout(() => {
+        navigate(levelToRoute[option.id] || "/");
+      }, 600);
+    } catch (err) {
+      setError(
+        err.response?.data?.message || "Failed to save breathing preference."
+      );
+    }
   };
+
+  if (loading) return <p>Loading your breathing preferences...</p>;
 
   return (
     <div className="breathing-level-selector App">
@@ -54,6 +139,8 @@ function BreathingLevelSelector() {
         <h1>Choose Your Breathing Buddy</h1>
         <p>Select an animal to start your mindful journey.</p>
       </header>
+
+      {error && <p className="error-message">{error}</p>}
 
       <main>
         <div className="options-container">

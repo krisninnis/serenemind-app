@@ -28,7 +28,12 @@ function AnimalChoice() {
 
   const handleSelect = (key) => {
     localStorage.setItem("breathingAnimal", key);
-    navigate("/home");
+    const animalToRoute = {
+      slowSloth: "/sloth-home",
+      calmKoala: "/koala-home", // Placeholder for future route
+      zenZebra: "/zebra-home", // Placeholder for future route
+    };
+    navigate(animalToRoute[key] || "/");
   };
 
   return (

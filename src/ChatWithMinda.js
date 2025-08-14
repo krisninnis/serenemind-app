@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import ChatService from "./services/ChatService";
-import "./App.scss";
+import "./styles/themes/App.scss";
 
 // Helper to convert URLs in text to clickable links
 function linkify(text) {

@@ -18,6 +18,14 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "postcss-loader": "^8.1.1",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.90.0",
+    "sass-loader": "^16.0.5",
+    "style-loader": "^4.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

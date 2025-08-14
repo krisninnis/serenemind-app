@@ -1,0 +1,131 @@
+.App.sloth-theme {
+  background: #efe3c9; // soft beige background
+  color: #6a0dad; // sloth purple text
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  padding: 2rem;
+
+  .App-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    width: 180px;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: #6a0dad;
+    text-shadow: 1px 1px 0 #f5f1e9;
+  }
+
+  p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: #4c1d95;
+  }
+
+  .page-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .page-box {
+    position: relative;
+    background: linear-gradient(135deg, #d4c4a4 0%, #e6d9f7 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #4c1d95;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(106, 13, 173, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
+    overflow: hidden;
+
+    /* subtle leaf pattern using SVG data URI */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='%236a0dad' opacity='0.05' xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><path d='M12 2C8 7 2 10 2 10s3 6 8 8c5-2 8-8 8-8s-6-3-8-8z'/></svg>");
+      background-repeat: repeat;
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover,
+    &:focus {
+      background: linear-gradient(135deg, #e8dbf7 0%, #d4c1f0 100%);
+      transform: translateY(-4px);
+      outline: none;
+
+      &::before {
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%237e27de' opacity='0.07' xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><path d='M12 2C8 7 2 10 2 10s3 6 8 8c5-2 8-8 8-8s-6-3-8-8z'/></svg>");
+        background-repeat: repeat;
+      }
+    }
+  }
+
+  .page-title-button {
+    background: transparent;
+    border: none;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4c1d95;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    text-align: left;
+
+    &:hover,
+    &:focus {
+      color: #6a0dad;
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+
+  .clickable-description {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #4c1d95;
+  }
+}
+.page-box {
+  position: relative;
+  background: linear-gradient(135deg, #d4c4a4 0%, #e6d9f7 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: #4c1d95;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(106, 13, 173, 0.15);
+  transition: background 0.3s ease, transform 0.2s ease;
+  overflow: hidden;
+
+  /* subtle leaf pattern using SVG data URI */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%236a0dad' opacity='0.05' xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><path d='M12 2C8 7 2 10 2 10s3 6 8 8c5-2 8-8 8-8s-6-3-8-8z'/></svg>");
+    background-repeat: repeat;
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 0;
+  }
+}

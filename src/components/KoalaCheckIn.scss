@@ -1,0 +1,356 @@
+.koala-checkin-container {
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  background-color: #e3e7e6; // soft muted grey-green
+  color: #3f4e4f; // dark slate green tone
+
+  .logo {
+    width: 120px;
+    margin-bottom: 1rem;
+    filter: brightness(0.8); // slightly dimmed for softness
+  }
+
+  .quote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #647d75; // muted green-gray
+    margin-bottom: 1.5rem;
+  }
+
+  .start-button {
+    background-color: #6b8e8e; // desaturated teal/green
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: #557474; // darker teal on hover
+    }
+  }
+
+  .intro-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      font-size: 2rem;
+      color: #557474; // darker teal-green
+    }
+
+    p {
+      margin-bottom: 2rem;
+      color: #3f4e4f;
+    }
+
+    .activity-box {
+      background: linear-gradient(135deg, #b7c7c5 0%, #d8e3e1 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(85, 116, 116, 0.1);
+      position: relative;
+      overflow: hidden;
+      color: #3f4e4f;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%23557474' opacity='0.05' xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><path d='M12 2C8 7 2 10 2 10s3 6 8 8c5-2 8-8 8-8s-6-3-8-8z'/></svg>");
+        background-repeat: repeat;
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      h3 {
+        color: #557474;
+        margin-bottom: 0.5rem;
+      }
+
+      .activity-description {
+        color: #3f4e4f;
+        margin-bottom: 0.5rem;
+      }
+
+      .activity-instructions {
+        color: #5a6d6c;
+        font-size: 0.95rem;
+      }
+
+      .start-button {
+        display: block;
+        margin: 1rem auto 0 auto;
+      }
+    }
+  }
+
+  .breathing-section {
+    background-color: #d1dbd9;
+    border: 2px solid #557474;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 2rem auto;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #557474;
+    }
+
+    .breathing-countdown {
+      font-size: 6rem;
+      color: #557474;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #3f4e4f;
+      margin-bottom: 1.5rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      button {
+        background-color: #6b8e8e;
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background-color: #557474;
+        }
+      }
+    }
+  }
+
+  .meditation-section {
+    background-color: #e7f1f0;
+    border: 2px solid #aac6c4;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 2rem auto;
+    position: relative;
+
+    .meditation-audio {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .meditation-text {
+      margin-top: 1rem;
+      font-style: italic;
+      color: #3f4e4f;
+    }
+
+    .meditation-timer {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #557474;
+      margin-bottom: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      button {
+        background-color: #6b8e8e;
+        color: white;
+        border: none;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+          background-color: #557474;
+        }
+      }
+    }
+  }
+
+  .completion-section {
+    margin-top: 2rem;
+
+    h2 {
+      color: #10b981;
+    }
+
+    p {
+      color: #3f4e4f;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.countdown-section {
+  background-color: #d1dbd9;
+  border: 2px solid #557474;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 2rem auto;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    color: #557474;
+    margin-bottom: 1rem;
+  }
+
+  .countdown-number {
+    font-size: 5rem;
+    color: #6b8e8e;
+    font-weight: bold;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  button {
+    background-color: #6b8e8e;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: #557474;
+    }
+  }
+}
+
+.breathing-video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(85, 116, 116, 0.2);
+}
+/* --------------------------
+   USER STATS DISPLAY
+--------------------------- */
+.user-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3f4e4f;
+
+  p {
+    background-color: #b7c7c5;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(85, 116, 116, 0.15);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      background-color: #d8e3e1;
+    }
+  }
+}
+
+/* Add small animation for Zen Zebra status */
+.user-stats p:last-child {
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffd166 0%, #ef476f 100%);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px #ef476f, 0 0 10px #ffd166;
+  }
+  100% {
+    box-shadow: 0 0 15px #ef476f, 0 0 25px #ffd166;
+  }
+}
+/* --------------------------
+   SCORE / STREAK PULSE ANIMATION
+--------------------------- */
+.user-stats p span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.user-stats.pulse span {
+  animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* --------------------------
+   SCORE / STREAK PULSE ANIMATION
+--------------------------- */
+.user-stats p span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.user-stats.pulse span {
+  animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

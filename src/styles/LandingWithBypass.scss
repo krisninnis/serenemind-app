@@ -1,0 +1,79 @@
+// Import shared variables and base styles
+@import "./App.scss";
+
+.LandingWithBypass,
+.App-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // vertical center
+  align-items: center; // horizontal center
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+  background-color: $base-background-color;
+  color: $base-text-color;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  .logo {
+    max-width: 140px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+
+    button,
+    a.link-button {
+      min-width: 120px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: $base-button-color;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $base-hover-color;
+      }
+    }
+  }
+}
+
+/* Responsive tweaks */
+@media (min-width: 600px) {
+  .LandingWithBypass,
+  .App-header {
+    padding: 40px;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .button-group button,
+    .button-group a.link-button {
+      min-width: 150px;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media (min-width: 900px) {
+  .LandingWithBypass,
+  .App-header {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
